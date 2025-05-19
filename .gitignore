@@ -6,3 +6,4 @@ tsconfig.json
 .qodo
 uploads/
 dist/uploads/
+prisma/dev.db

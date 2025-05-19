@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "prisma migrate deploy",
     "generate": "prisma generate",
-    "build": "npm install --omit=dev && npm run migrate && npm run generate",
+    "build": "npm install --omit=dev && npm run migrate && npm run generate && npx prisma migrate deploy",
     "start:dev": "tsx watch ./src/app.ts",
     "start": "node ./dist/app.js"
   },
@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.8.2",
-    "@supabase/supabase-js": "^2.49.4",
+    "@supabase/supabase-js": "^2.49.5",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

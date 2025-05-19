@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Getting Started
 
 First install dependencies:
@@ -164,3 +165,7 @@ Retrieves a specific book by its ID.
   "msg": "Book not found or invalid ID"
 }
 ```
+=======
+# Univ-Lib-Backend
+Univ-Lib Backend
+>>>>>>> 22f3869d29f7a27c2a49b38b92c5a4667e9c1d11
