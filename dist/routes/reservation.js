@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { errorHandler } from "../middleware/errorHandler.js";
+import isStudent from "../middleware/isStudent.js";
+import newReservation from "../controllers/reservation/newReservation.js";
+import isLibrarian from "../middleware/isLibrarian.js";
+import getReservationsList from "../controllers/reservation/getReservationsList.js";
+import getSpecificReservation from "../controllers/reservation/getSpecificReservation.js";
+const reservationRouter = Router();
+reservationRouter.post('/new', errorHandler(isStudent), errorHandler(newReservation));
+reservationRouter.get('/all', errorHandler(isLibrarian), errorHandler(getReservationsList));
+reservationRouter.get('/:id', errorHandler(isLibrarian), errorHandler(getSpecificReservation));
+export default reservationRouter;

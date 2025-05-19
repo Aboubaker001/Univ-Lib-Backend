@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  LIBRARIAN
+  ADMIN
+}
+
+enum BookStatus {
+  AVAILABLE
+  CHECKED_OUT
+  RESERVED
+  UNDER_MAINTENANCE
+  LOST
+}
+
+enum ReservationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+  CANCELED
+  OVERDUE
+  RETURNED
+}
+
+model User {
+  id               String        @id @default(cuid())
+  firstName        String
+  familyName       String
+  studentId        String        @unique
+  faculty          String
+  academicYear     String
+  major            String
+  email            String        @unique
+  phone            String
+  idCardUrl        String?
+  password         String
+  idProfilePic     String?
+  role             UserRole      @default(STUDENT)
+  isVerified       Boolean       @default(false)
+  reservationLimit Int           @default(3)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  Reservation      Reservation[]
+  fines            Fine[]        @relation("UserFines")
+}
+
+model Book {
+  id              String        @id @default(cuid())
+  isbn            String        @unique
+  title           String
+  edition         String
+  publisher       String
+  publicationYear Int
+  pageCount        Int
+  language        String
+  coverUrl        String?
+  digitalCopyUrl  String
+  keywords        String[]
+  authors         String[]
+  status          BookStatus    @default(AVAILABLE)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  Reservation     Reservation[]
+}
+
+model Reservation {
+  id         String            @id @default(cuid())
+  userId     String
+  bookId     String
+  startDate  DateTime
+  returnDate DateTime
+  status     ReservationStatus @default(PENDING)
+  user       User              @relation(fields: [userId], references: [id])
+  book       Book              @relation(fields: [bookId], references: [id])
+  fine       Fine?             @relation("ReservationFine")
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+}
+
+model Fine {
+  id            String      @id @default(cuid())
+  userId        String
+  reservationId String      @unique
+  amount        Float       @default(0.00)
+  paid          Boolean     @default(false)
+  user          User        @relation("UserFines", fields: [userId], references: [id])
+  reservation   Reservation @relation("ReservationFine", fields: [reservationId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
