@@ -41,6 +41,11 @@ bookRouter.put('/:id',
   errorHandler(updateBookInfo)
 );
 
+bookRouter.get('/test', (req, res) => {
+  res.send('Books router is working!');
+});
+
+
 // Public routes
 bookRouter.get('/:id', errorHandler(getBook));
 bookRouter.get('/all', errorHandler(getBooksList));
