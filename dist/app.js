@@ -12,12 +12,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 // CORS configuration
-const allowedOrigins = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'https://univ-library.netlify.app',
-    process.env.FRONTEND_URL
-].filter(Boolean);
+app.use(cors({
+  origin: 'https://univ-library.netlify.app',
+  credentials: true
+}));
+
+app.get('/api/test', (req, res) => {
+  res.json({ success: true, message: 'CORS is working!' });
+});
+
+// Other middlewares
+app.use(express.json());
 
 app.use(cors({
     origin: (origin, callback) => {
