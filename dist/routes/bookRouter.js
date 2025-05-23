@@ -47,7 +47,7 @@ bookRouter.get('/test', (req, res) => {
 
 
 // Public routes
-bookRouter.get('/:id', errorHandler(getBook));
 bookRouter.get('/all', errorHandler(getBooksList));
+bookRouter.get('/:id', errorHandler(getBook));
 
 export default bookRouter;
