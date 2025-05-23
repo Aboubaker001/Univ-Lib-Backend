@@ -15,7 +15,7 @@ const app = express();
 const allowedOrigins = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://library-frontend.netlify.app',
+    'https://univ-library.netlify.app',
     process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -47,15 +47,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use('/api', mainRouter);
-app.use('/api/users', userRouter); // Mount userRouter
+app.use('/api/user', userRouter); // Mount userRouter
 
 // Static files (after API routes)
-app.use(express.static(path.join(__dirname, '../frontend')));
+//app.use(express.static(path.join(__dirname, '../frontend')));
 
 // SPA routing (exclude API routes)
-app.get(/^\/(?!api).*/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/public/index.html'));
-});
+//app.get(/^\/(?!api).*/, (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/public/index.html'));
+//});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
