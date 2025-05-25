@@ -1,4 +1,21 @@
-import { Resend } from "resend";
-import { RESEND_API_KEY } from "../../config/env.js";
-const resend = new Resend(RESEND_API_KEY);
-export default resend;
+import { APP_EMAIL } from "../../config/env.js";
+import resend from "./resendClient.js";
+const sendNotificaionEmail = async (receiver, message) => {
+    try {
+        const { data, error } = await resend.emails.send({
+            from: APP_EMAIL,
+            to: [receiver],
+            subject: "Notificaion",
+            text: message,
+        });
+        if (error) {
+            return false;
+        }
+        return true;
+    }
+    catch (err) {
+        console.log(err);
+        return false;
+    }
+};
+export default sendNotificaionEmail;

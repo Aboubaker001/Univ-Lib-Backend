@@ -14,7 +14,8 @@ const isLibrarian = async (req, res, next) => {
                 id: payload.id
             }
         });
-        if (user && user.role === "LIBRARIAN") {
+        if (user && ( user.role === "LIBRARIAN" || user.role === "ADMIN")) {
+            console.log("authorized")
             next();
         }
         else {

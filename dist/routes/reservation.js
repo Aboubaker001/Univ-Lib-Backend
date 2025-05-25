@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { errorHandler } from "../middleware/errorHandler.js";
 import isStudent from "../middleware/isStudent.js";
+import isLibrarianOrAdmin from '../middleware/isLibrarianOrAdmin.js';
 import newReservation from "../controllers/reservation/newReservation.js";
 import isLibrarian from "../middleware/isLibrarian.js";
 import getReservationsList from "../controllers/reservation/getReservationsList.js";

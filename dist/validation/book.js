@@ -21,10 +21,11 @@ export const newBookSchema = z.object({
     publicationYear: yearSchema,
     pageCount: pageCountSchema,  // Fixed typo from 'pageCout' to 'pageCount'
     language: z.string().min(2, { message: "Language is required" }),
-    coverUrl: urlSchema.optional(),
+    //coverUrl: urlSchema.optional(),
     digitalCopyUrl: urlSchema,
     keywords: z.array(z.string().min(1)).min(1, { message: "At least one keyword is required" }),
     authors: z.array(z.string().min(1)).min(1, { message: "At least one author is required" }),
+    status : z.enum(["AVAILABLE", "CHECKED_OUT", "RESERVED", "UNDER_MAINTENANCE", "LOST"]),
 }).strict();
 
 export const updateBookSchema = newBookSchema
