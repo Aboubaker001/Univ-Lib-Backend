@@ -5,7 +5,7 @@ import isAdmin from "../middleware/isAdmin.js";
 import addNewBook from "../controllers/book/addNewBook.js";
 import getBooksList from "../controllers/book/getBooksList.js";
 import searchBooks from "../controllers/book/searchBooks.js";
-import getBook from "../controllers/book/getSpecificBook.js";
+import getSpecificBook from "../controllers/book/getSpecificBook.js";
 import updateBookInfo from "../controllers/book/updateBookInfo.js";
 import upload from '../services/upload/multer.js';
 import uploadBookImage from "../controllers/book/uploadBookImage.js";
@@ -67,6 +67,6 @@ userRouter.get('/books/latest', async (req, res, next) => {
   }
 });
 bookRouter.get('/search', errorHandler(searchBooks));
-bookRouter.get('/:id', errorHandler(getBook));
+bookRouter.get('/:id', errorHandler(getSpecificBook));
 
 export default bookRouter;

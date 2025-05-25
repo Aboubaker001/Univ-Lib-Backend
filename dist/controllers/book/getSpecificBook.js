@@ -1,7 +1,7 @@
 import prisma from "../../services/db/prismaClient.js";
 import HttpExeception from "../../utils/HttpExeception.js";
 import Exceptions from "../../utils/Exceptions.js";
-const getBook = async (req, res) => {
+const getSpecificBook = async (req, res) => {
     const bookId = req.params.id;
     const book = await prisma.book.findUnique({
         where: {
@@ -16,4 +16,4 @@ const getBook = async (req, res) => {
         data: book,
     });
 };
-export default getBook;
+export default getSpecificBook;
